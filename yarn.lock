@@ -4906,7 +4906,7 @@ neo-async@^2.5.0:
   version "2.6.1"
   resolved "https://registry.npm.taobao.org/neo-async/download/neo-async-2.6.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fneo-async%2Fdownload%2Fneo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
 
-nerv-devtools@^1.4.0:
+nerv-devtools@^1.4.6:
   version "1.4.6"
   resolved "https://registry.npm.taobao.org/nerv-devtools/download/nerv-devtools-1.4.6.tgz#5f66e764ddf8576b72fd4b862b10c3b8be475c40"
   dependencies:
@@ -4922,7 +4922,7 @@ nerv-utils@1.4.5:
   version "1.4.5"
   resolved "https://registry.npm.taobao.org/nerv-utils/download/nerv-utils-1.4.5.tgz?cache=0&sync_timestamp=1569399608421&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnerv-utils%2Fdownload%2Fnerv-utils-1.4.5.tgz#3e017a8a1b605b35ee31ad396a038207fbc597b0"
 
-nervjs@1.4.6, nervjs@^1.4.0:
+nervjs@1.4.6, nervjs@^1.4.6:
   version "1.4.6"
   resolved "https://registry.npm.taobao.org/nervjs/download/nervjs-1.4.6.tgz#e2bb0dc5e5d5cfa3bd5048d287d23f32cf696508"
   dependencies:
