@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "mp-chat",
   "description": "小程序聊天室",
-  "appid": "touristappid",
+  "appid": "wx7f73409a9442e394",
   "setting": {
     "urlCheck": true,
     "es6": false,
