@@ -1,5 +1,6 @@
 import Taro, { useEffect } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
+import { View, Input, Button } from '@tarojs/components'
+import { checkSession, login } from '../../service'
 import './index.less'
 
 export default function Index () {
@@ -9,9 +10,26 @@ export default function Index () {
       Taro.setNavigationBarTitle({ title: 'chat' })
     }
   }, [])
+
+  const handleLogin = async () => {
+    const token = Taro.getStorageSync('token');
+    if(token) {
+      const isLogin = await checkSession();
+      if(!isLogin) {
+        await login();
+      }
+    } else {
+      await login();
+    }
+  }
+
+  const hadleGetUserInfo = (e: any) => {
+    console.log(e.detail);
+  }
   return (
     <View className='container'>
-      <View className='list'>record</View>
+      <View className='list' onClick={handleLogin}>record</View>
+      <Button openType='getUserInfo' lang='zh_CN' onGetUserInfo={hadleGetUserInfo}>获取用户信息</Button>
       <View className='input'>
         <Input type='text' placeholder='Type something' confirm-type='send' focus/>
       </View>
