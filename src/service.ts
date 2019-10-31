@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 
-const devBaseUrl = 'http://localhost:3000'
+const devBaseUrl = 'http://10.12.19.5:3000'
 const prodBaseUrl = 'https://zzcan.xyz/api'
 const baseUrl = process.env.NODE_ENV === 'development' ? devBaseUrl : prodBaseUrl
 
@@ -18,41 +18,57 @@ export async function wxLogin() {
     const res = await Taro.login();
     return res;
   } catch (error) {
-    throw Error('wxLogin error')
+    throw new Error('wxLogin error')
   }
 }
 
-export async function login() {
+export async function login(rawUserInfo) {
   try {
     const loginInfo = await wxLogin();
     const res = await Taro.request({
-      url: `${baseUrl}/login`,
-      method: 'GET',
+      url: `${baseUrl}/user/login`,
+      method: 'POST',
       data: {
-        code: loginInfo.code
+        code: loginInfo.code,
+        rawUserInfo,
       }
     })
     if(res.data.code === 200) {
-      Taro.setStorageSync('token', res.data.data);
+      Taro.setStorageSync('token', res.data.data.sessionKey);
+      Taro.setStorageSync('userInfo', JSON.stringify(res.data.data.userInfo));
       return true;
     }
   } catch (error) {
-    throw Error('login error')
+    throw new Error('login error')
   }
 }
 
-export async function test(params: any) {
+export async function update(rawUserInfo: string) {
   try {
     const res = await Taro.request({
-      url: `${baseUrl}/test`,
+      url: `${baseUrl}/user/update`,
       method: 'POST',
-      data: params,
+      data: { rawUserInfo },
       header: {
         token: Taro.getStorageSync('token')
       }
     });
-    return res.data;
+    if(res.data.code === 200) {
+      Taro.setStorageSync('userInfo', res.data.data);
+    }
   } catch (error) {
-    throw Error('test error')
+    throw new Error('update error')
+  }
+}
+
+export async function test() {
+  try {
+    await Taro.request({
+      url: `${baseUrl}/test`,
+      method: 'GET',
+    });
+
+  } catch (error) {
+    throw new Error('update error')
   }
 }

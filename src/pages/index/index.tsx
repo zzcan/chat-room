@@ -1,7 +1,7 @@
 
 import Taro, { useEffect } from '@tarojs/taro'
 import { View, Input, Button } from '@tarojs/components'
-import { checkSession, login, test } from '../../service'
+import { update, test } from '../../service'
 import './index.less'
 
 export default function Index () {
@@ -12,62 +12,51 @@ export default function Index () {
     }
   }, [])
 
-  useEffect(() => {
-    // Taro.connectSocket({
-    //   url: 'ws://localhost:8080',
-    //   header: {
-    //     token: Taro.getStorageSync('token')
-    //   },
-    //   success: function () {
-    //     console.log('connect success')
-    //   }
-    // }).then(task => {
-    //   task.onOpen(function () {
-    //     console.log('onOpen')
-    //     task.send({ data: 'send some msg' })
-    //   })
-    //   task.onMessage(function (msg) {
-    //     console.log('onMessage: ', msg)
-    //     // task.close()
-    //   })
-    //   task.onError(function () {
-    //     console.log('onError')
-    //   })
-    //   task.onClose(function (e) {
-    //     console.log('onClose: ', e)
-    //   })
-    // })
-  }, [])
-
-  const handleLogin = async () => {
-    const token = Taro.getStorageSync('token');
-    if(token) {
-      const isLogin = await checkSession();
-      if(!isLogin) {
-        const loginSuccess = await login();
-        if(loginSuccess) Taro.showToast({ title: '登录成功！' })
-      } else {
-        Taro.showToast({
-          title: '已经登录！'
-        })
-      }
-    } else {
-      await login();
-    }
-  }
+  // useEffect(() => {
+  //   Taro.connectSocket({
+  //     url: 'ws://10.12.19.5:3000',
+  //     header: {
+  //       token: Taro.getStorageSync('token')
+  //     },
+  //     success: function () {
+  //       console.log('connect success')
+  //     }
+  //   }).then(task => {
+  //     task.onOpen(function () {
+  //       console.log('onOpen')
+  //       task.send({
+  //         message: 'requestComputer',
+  //       })
+  //     })
+  //     task.onMessage(function (msg) {
+  //       console.log('onMessage: ', msg)
+  //       // task.close()
+  //     })
+  //     task.onError(function () {
+  //       console.log('onError')
+  //     })
+  //     task.onClose(function (e) {
+  //       console.log('onClose: ', e)
+  //     })
+  //   })
+  // }, [])
 
   const hadleGetUserInfo = (e: any) => {
     console.log('---e.detail---', e.detail);
     Taro.setStorageSync('userInfo', JSON.stringify(e.detail.userInfo))
   }
 
+  const handleUpdate = async () => {
+    const { rawData } = await Taro.getUserInfo();
+    await update(rawData);
+  }
+
   const handleTest = async () => {
-    const userInfo = Taro.getStorageSync('userInfo')
-    console.log('---test data---', await test(userInfo));
+    await test();
   }
   return (
     <View className='container'>
-      <View className='list' onClick={handleLogin}>record</View>
+      <View className='list'>record</View>
       <Button openType='getUserInfo' lang='zh_CN' onGetUserInfo={hadleGetUserInfo}>获取用户信息</Button>
       <View className='input' onClick={handleTest}>
         <Input type='text' placeholder='Type something' confirm-type='send' focus/>
