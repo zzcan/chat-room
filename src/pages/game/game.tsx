@@ -167,7 +167,7 @@ export default function Game() {
     if (status.playing) return;
     if (!connected) return;
 
-    setOtherInfo({})
+    // setOtherInfo({})
 
     setStatus({
       playing: false,

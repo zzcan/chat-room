@@ -1,9 +1,8 @@
 import Taro from '@tarojs/taro'
 import Emitter from './emitter'
+import config from '../config'
 
-const devBaseUrl = 'ws://10.12.19.5:3000'
-const prodBaseUrl = 'https://zzcan.xyz/api'
-const baseUrl = process.env.NODE_ENV === 'development' ? devBaseUrl : prodBaseUrl
+const baseUrl = config.ws[process.env.NODE_ENV];
 
 class Tunnel {
   public emitter: any = {}

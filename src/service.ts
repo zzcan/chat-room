@@ -1,8 +1,7 @@
 import Taro from '@tarojs/taro'
+import config from './config'
 
-const devBaseUrl = 'http://10.12.19.5:3000'
-const prodBaseUrl = 'https://zzcan.xyz/api'
-const baseUrl = process.env.NODE_ENV === 'development' ? devBaseUrl : prodBaseUrl
+const baseUrl = config.api[process.env.NODE_ENV];
 
 export async function checkSession() {
   try {
