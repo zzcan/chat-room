@@ -1,6 +1,7 @@
+
 import Taro, { useEffect } from '@tarojs/taro'
 import { View, Input, Button } from '@tarojs/components'
-import { checkSession, login } from '../../service'
+import { update, test } from '../../service'
 import './index.less'
 
 export default function Index () {
@@ -11,26 +12,53 @@ export default function Index () {
     }
   }, [])
 
-  const handleLogin = async () => {
-    const token = Taro.getStorageSync('token');
-    if(token) {
-      const isLogin = await checkSession();
-      if(!isLogin) {
-        await login();
-      }
-    } else {
-      await login();
-    }
-  }
+  // useEffect(() => {
+  //   Taro.connectSocket({
+  //     url: 'ws://10.12.19.5:3000',
+  //     header: {
+  //       token: Taro.getStorageSync('token')
+  //     },
+  //     success: function () {
+  //       console.log('connect success')
+  //     }
+  //   }).then(task => {
+  //     task.onOpen(function () {
+  //       console.log('onOpen')
+  //       task.send({
+  //         message: 'requestComputer',
+  //       })
+  //     })
+  //     task.onMessage(function (msg) {
+  //       console.log('onMessage: ', msg)
+  //       // task.close()
+  //     })
+  //     task.onError(function () {
+  //       console.log('onError')
+  //     })
+  //     task.onClose(function (e) {
+  //       console.log('onClose: ', e)
+  //     })
+  //   })
+  // }, [])
 
   const hadleGetUserInfo = (e: any) => {
-    console.log(e.detail);
+    console.log('---e.detail---', e.detail);
+    Taro.setStorageSync('userInfo', JSON.stringify(e.detail.userInfo))
+  }
+
+  const handleUpdate = async () => {
+    const { rawData } = await Taro.getUserInfo();
+    await update(rawData);
+  }
+
+  const handleTest = async () => {
+    await test();
   }
   return (
     <View className='container'>
-      <View className='list' onClick={handleLogin}>record</View>
+      <View className='list'>record</View>
       <Button openType='getUserInfo' lang='zh_CN' onGetUserInfo={hadleGetUserInfo}>获取用户信息</Button>
-      <View className='input'>
+      <View className='input' onClick={handleTest}>
         <Input type='text' placeholder='Type something' confirm-type='send' focus/>
       </View>
     </View>

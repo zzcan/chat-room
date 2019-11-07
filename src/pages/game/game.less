@@ -1,0 +1,193 @@
+.root {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.my-side {
+  width: 1500px;
+  height: 1500px;
+  position: absolute;
+  bottom: -1125px;
+  left: -375px;
+  border-radius: 100%;
+  background: lightskyblue;
+  overflow: visible;
+}
+
+.your-side {
+  width: 1500px;
+  height: 1500px;
+  position: absolute;
+  top: -1500px;
+  left: -375px;
+  border-radius: 100%;
+  background: lightpink;
+  overflow: visible;
+  transition: top ease 0.6s;
+}
+
+.your-side.here {
+  top: -1100px;
+}
+
+.avatar {
+  position: absolute;
+  width: 172px;
+  height: 172px;
+  border-radius: 100%;
+  border: 8px solid white;
+  background-color: #f0f0f0;
+}
+
+.hand {
+  position: absolute;
+  width: 187px;
+  height: 187px;
+  border-radius: 100%;
+  overflow: visible;
+}
+
+.score, .streak {
+  position: absolute;
+  color: #334567;
+  width: 225px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.streak {
+  text-align: right;
+}
+
+.my-side .avatar {
+  left: 656.25px;
+  top: -93.75px;
+  transition: top ease .2s;
+}
+
+.my-side .hand {
+  left: 656.25px;
+  top: 150px;
+  transition: top ease .2s;
+}
+
+.root.playing .my-side .hand:active {
+  transform: scale(1.3);
+}
+
+.root.done .my-side .avatar {
+  top: 168.75px;
+}
+
+.root.done .my-side .hand {
+  top: -112.5px;
+}
+
+.my-side .score {
+  left: 412.5px;
+  bottom: 1162.5px;
+}
+
+.my-side .streak {
+  right: 412.5px;
+  bottom: 1162.5px;
+}
+
+.your-side .avatar {
+  left: 656.25px;
+  bottom: -93.75px;
+  transition: all ease .2s;
+  opacity: 0;
+}
+
+.your-side.here .avatar {
+  opacity: 1;
+}
+
+.your-side.move-1 .avatar {
+  transform: rotate(15deg);
+}
+
+.your-side.move-2 .avatar {
+  transform: rotate(-15deg);
+}
+
+.your-side .hand {
+  left: 656.25px;
+  bottom: 150px;
+  opacity: 0;
+  transition: bottom ease .2s;
+  transform: rotate(180deg);
+}
+
+.root.done .your-side .avatar {
+  bottom: 190px;
+}
+
+.root.done .your-side .hand {
+  bottom: -93.75px;
+  opacity: 1;
+}
+
+.your-side .score {
+  left: 412.5px;
+  top: 1106.25px;
+}
+
+.your-side .streak {
+  right: 412.5px;
+  top: 1106.25px;
+}
+
+
+.start-game, .request-computer {
+  position: absolute;
+  width: 200px;
+  height: 80px;
+  line-height: 80px;
+  margin-left: -100px;
+  bottom: 500px;
+  left: 50%;
+  display: none;
+}
+
+.request-computer {
+  width: 300px;
+  margin-left: -150px;
+}
+
+.root.finding .request-computer {
+  display: block;
+}
+
+.root.connected .start-game {
+  display: block;
+}
+
+.root.connected.playing .start-game,
+.root.finding .start-game {
+  display: none;
+}
+
+.game-info {
+  font-size: 60px;
+  position: absolute;
+  width: 750px;
+  height: 112.5px;
+  line-height: 112.5px;
+  // margin-top: -56.25px;
+  bottom: 600px;
+  left: 0;
+  text-align: center;
+  opacity: 1;
+}
+
+.root.connected.root.playing .game-info,
+.root.connected.root.done .game-info {
+  opacity: 1;
+}

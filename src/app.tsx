@@ -21,12 +21,14 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/game/game',
+      'pages/login/login',
+      'pages/index/index',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'chat',
+      navigationBarTitleText: 'game',
       navigationBarTextStyle: 'black'
     }
   }
