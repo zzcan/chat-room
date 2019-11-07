@@ -1,10 +1,10 @@
 export default {
   api: {
-    development: 'http://106.54.47.152/game',
+    development: 'https://zzcan.xyz/game',
     production: 'https://zzcan.xyz/game'
   },
   ws: {
-    development: 'ws://106.54.47.152/game/',
+    development: 'wss://zzcan.xyz/game/',
     production: 'wss://zzcan.xyz/game/'
   },
 }
